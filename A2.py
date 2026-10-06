@@ -1,3 +1,6 @@
+from unicodedata import name
+
+
 class BaseProduct:
       def __init__(self, product_id, name, price):
          self.product_id = str(product_id)
@@ -50,3 +53,29 @@ class Inventory:
                     file.write(f"{row[0]},{row[1]},{row[2]},{row[3]}\n")
          except Exception as e:
             print(f"เกิดข้อผิดพลาดในการบันทึกไฟล์: {e}")
+      def add_product(self):
+         print("\n===== เพิ่มสินค้า =====")
+         product_id = input("รหัสสินค้า: ")
+
+          # เช็คไอดีซ้ำใน 2D Array
+         for row in self.products_data:
+            if row[0] == product_id:
+               print("รหัสสินค้านี้มีอยู่ในระบบแล้ว")
+               return
+
+         name = input("ชื่อสินค้า: ")
+
+         try:
+            price = float(input("ราคาสินค้า: "))
+            stock = int(input("จำนวนสินค้า: "))
+            if price < 0 or stock < 0:
+               print("ราคาและจำนวนต้องไม่ติดลบ")
+               return
+         except ValueError:
+            print("ข้อผิดพลาด: กรุณากรอกตัวเลขให้ถูกต้อง")
+            return
+
+         # บันทึกลง 2D Array
+         self.products_data.append([product_id,name, price, stock])
+         self._save_to_file()
+         print("เพิ่มสินค้าสำเร็จ!")
