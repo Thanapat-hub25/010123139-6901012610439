@@ -42,3 +42,11 @@ class Inventory:
             self.products_data = []
          except Exception as e:
             print(f"เกิดข้อผิดพลาดในการอ่านไฟล์: {e}")
+      def _save_to_file(self):
+         """บันทึกข้อมูลจาก 2D Array ลงไฟล์"""
+         try:
+            with open(self.filename, "w", encoding="utf-8") as file:
+                for row in self.products_data:
+                    file.write(f"{row[0]},{row[1]},{row[2]},{row[3]}\n")
+         except Exception as e:
+            print(f"เกิดข้อผิดพลาดในการบันทึกไฟล์: {e}")
