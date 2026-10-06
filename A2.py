@@ -18,3 +18,27 @@ class Product(BaseProduct):
       def display_info(self):
          super().display_info()  # เรียกใช้การแสดงผลของคลาสแม่
          print(f"จำนวน      : {self.stock} ชิ้น")
+class Inventory:
+    def __init__(self):
+        # ใช้ 2D Array ในการเก็บข้อมูล [ [id, name, price, stock], ... ]
+        self.products_data = []
+        self.filename = "inventory.txt"
+        self._load_from_file()
+   def _load_from_file(self):
+      """อ่านข้อมูลจากไฟล์ขึ้นมาเก็บใน 2D Array"""
+      try:
+         with open(self.filename, "r", encoding="utf-8") as file:
+               self.products_data = []
+               for line in file:
+                  data = line.strip().split(",")
+                  if len(data) == 4:
+                     self.products_data.append([
+                        data[0],
+                        data[1],
+                        float(data[2]),
+                        int(data[3])
+                        ])
+      except FileNotFoundError:
+         self.products_data = []
+      except Exception as e:
+         print(f"เกิดข้อผิดพลาดในการอ่านไฟล์: {e}")
