@@ -2,14 +2,14 @@ def encrypt(s, k):
     t = ""
     i = 0
     while i < len(s):
-        c = s[i].upper()              # แปลงเป็นตัวพิมพ์ใหญ่
-        if c.isalpha():               # เช็กว่าเป็นตัวอักษร
-            code = ord(c) + k         # เลื่อนรหัส ASCII
+        c = s[i].upper()              
+        if c.isalpha():               
+            code = ord(c) + k         
             if code > ord("Z"):
-                code = code - 26      # เกิน Z ให้วนกลับไป A
+                code = code - 26      
             t = t + chr(code)
         else:
-            t = t + s[i]              # ไม่ใช่ตัวอักษร (เช่น ช่องว่าง) ใช้ตัวเดิม
+            t = t + s[i]              
         i = i + 1
     return t
 
