@@ -21,3 +21,5 @@ def main():
     n = 10
     print("Even sum up to", n, "=", sum_even(n))
     print("Odd sum up to", n, "=", sum_odd(n))
+if __name__ == "__main__":
+    main()
