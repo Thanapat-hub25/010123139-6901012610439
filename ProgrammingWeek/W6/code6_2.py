@@ -7,11 +7,11 @@ def sum_m_to_n(a, m, n):
     return total
 
 def is_sorted(a):
-    ok = True                          # สมมติว่าเรียงลำดับอยู่
+    ok = True                          
     i = 0
     while i < len(a) - 1:
         if a[i] > a[i + 1]:
-            ok = False                 # เจอคู่ที่เรียงผิด
+            ok = False                
         i = i + 1
     return ok
 
