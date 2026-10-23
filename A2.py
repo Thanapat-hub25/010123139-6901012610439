@@ -79,55 +79,55 @@ class Inventory:
         self._save_to_file()
         print("เพิ่มสินค้าสำเร็จ!")
 
-def show_product(self):
-    print("\n===== สินค้าทั้งหมด =====")
-    if not self.products_data:
-        print("ยังไม่มีสินค้า")
-        return
+    def show_product(self):
+        print("\n===== สินค้าทั้งหมด =====")
+        if not self.products_data:
+            print("ยังไม่มีสินค้า")
+            return
 
-    # ดึงข้อมูลจาก 2D Array มาสร้างเป็น Object ของคลาสลูก (Product)
-    for row in self.products_data:
-        p = Product(row[0], row[1], row[2], row[3])
-        print("-------------------------")
-        p.display_info()
-    print("-------------------------")
-
-def search_product(self):
-    print("\n===== ค้นหาสินค้า =====")
-    search = input("กรอกรหัสสินค้า: ")
-
-    for row in self.products_data:
-        if row[0] == search:
+        # ดึงข้อมูลจาก 2D Array มาสร้างเป็น Object ของคลาสลูก (Product)
+        for row in self.products_data:
             p = Product(row[0], row[1], row[2], row[3])
-            print("พบสินค้า")
             print("-------------------------")
             p.display_info()
-            print("-------------------------")
-            return
-    print("ไม่พบสินค้านี้")
+        print("-------------------------")
 
-def stock_in(self):
-    print("\n===== รับสินค้าเข้า =====")
-    search = input("กรอกรหัสสินค้า: ")
+    def search_product(self):
+        print("\n===== ค้นหาสินค้า =====")
+        search = input("กรอกรหัสสินค้า: ")
 
-    for row in self.products_data:
-      if row[0] == search:
-        try:
-            amount = int(input("จำนวนที่รับเข้า: "))
-            if amount <= 0:
-                print("จำนวนต้องมากกว่า 0")
+        for row in self.products_data:
+            if row[0] == search:
+                p = Product(row[0], row[1], row[2], row[3])
+                print("พบสินค้า")
+                print("-------------------------")
+                p.display_info()
+                print("-------------------------")
                 return
+        print("ไม่พบสินค้านี้")
 
-            row[3] += amount  # อัปเดตสต็อกใน 2D Array
-            self._save_to_file()
+    def stock_in(self):
+        print("\n===== รับสินค้าเข้า =====")
+        search = input("กรอกรหัสสินค้า: ")
 
-            print("รับสินค้าเข้าสำเร็จ")
-            print(f"จำนวนคงเหลือ : {row[3]} ชิ้น")
-            return
-        except ValueError:
-            print("ข้อผิดพลาด: กรุณากรอกตัวเลขจำนวนเต็ม")
-            return
-    print("ไม่พบสินค้านี้")
+        for row in self.products_data:
+        if row[0] == search:
+            try:
+                amount = int(input("จำนวนที่รับเข้า: "))
+                if amount <= 0:
+                    print("จำนวนต้องมากกว่า 0")
+                    return
+
+                row[3] += amount  # อัปเดตสต็อกใน 2D Array
+                self._save_to_file()
+
+                print("รับสินค้าเข้าสำเร็จ")
+                print(f"จำนวนคงเหลือ : {row[3]} ชิ้น")
+                return
+            except ValueError:
+                print("ข้อผิดพลาด: กรุณากรอกตัวเลขจำนวนเต็ม")
+                return
+        print("ไม่พบสินค้านี้")
 
     def stock_out(self):
         print("\n===== ขายสินค้าออก =====")
