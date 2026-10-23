@@ -1,5 +1,3 @@
-from unicodedata import name
-
 class BaseProduct:
     def __init__(self, product_id, name, price):
         self.product_id = str(product_id)
@@ -127,7 +125,7 @@ class Inventory:
                 except ValueError:
                     print("ข้อผิดพลาด: กรุณากรอกตัวเลขจำนวนเต็ม")
                     return
-            print("ไม่พบสินค้านี้")
+        print("ไม่พบสินค้านี้")
 
     def stock_out(self):
         print("\n===== ขายสินค้าออก =====")
