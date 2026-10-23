@@ -111,23 +111,23 @@ class Inventory:
         search = input("กรอกรหัสสินค้า: ")
 
         for row in self.products_data:
-        if row[0] == search:
-            try:
-                amount = int(input("จำนวนที่รับเข้า: "))
-                if amount <= 0:
-                    print("จำนวนต้องมากกว่า 0")
+            if row[0] == search:
+                try:
+                    amount = int(input("จำนวนที่รับเข้า: "))
+                    if amount <= 0:
+                        print("จำนวนต้องมากกว่า 0")
+                        return
+
+                    row[3] += amount  # อัปเดตสต็อกใน 2D Array
+                    self._save_to_file()
+
+                    print("รับสินค้าเข้าสำเร็จ")
+                    print(f"จำนวนคงเหลือ : {row[3]} ชิ้น")
                     return
-
-                row[3] += amount  # อัปเดตสต็อกใน 2D Array
-                self._save_to_file()
-
-                print("รับสินค้าเข้าสำเร็จ")
-                print(f"จำนวนคงเหลือ : {row[3]} ชิ้น")
-                return
-            except ValueError:
-                print("ข้อผิดพลาด: กรุณากรอกตัวเลขจำนวนเต็ม")
-                return
-        print("ไม่พบสินค้านี้")
+                except ValueError:
+                    print("ข้อผิดพลาด: กรุณากรอกตัวเลขจำนวนเต็ม")
+                    return
+            print("ไม่พบสินค้านี้")
 
     def stock_out(self):
         print("\n===== ขายสินค้าออก =====")
