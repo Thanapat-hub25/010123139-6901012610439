@@ -52,7 +52,13 @@ class Inventory:
             print(f"เกิดข้อผิดพลาดในการบันทึกไฟล์: {e}")
     def add_product(self):
         print("\n===== เพิ่มสินค้า =====")
-        product_id = input("รหัสสินค้า: ")
+        # .strip() ตัดช่องว่างหน้าหลังออก
+        product_id = input("รหัสสินค้า: ").strip()
+
+        # เช็คว่าไม่ได้กด Enter เปล่าๆ
+        if product_id == "":
+            print("รหัสสินค้าห้ามว่าง")
+            return
 
         # เช็คไอดีซ้ำใน 2D Array
         for row in self.products_data:
@@ -60,7 +66,16 @@ class Inventory:
                print("รหัสสินค้านี้มีอยู่ในระบบแล้ว")
                return
 
-        name = input("ชื่อสินค้า: ")
+        name = input("ชื่อสินค้า: ").strip()
+
+        if name == "":
+            print("ชื่อสินค้าห้ามว่าง")
+            return
+
+        # ไฟล์คั่นข้อมูลด้วย , จึงห้ามมี , ในรหัสและชื่อ
+        if "," in product_id or "," in name:
+            print("รหัสและชื่อสินค้าห้ามมีเครื่องหมาย ,")
+            return
 
         try:
             price = float(input("ราคาสินค้า: "))
@@ -73,7 +88,7 @@ class Inventory:
             return
 
         # บันทึกลง 2D Array
-        self.products_data.append([product_id,name, price, stock])
+        self.products_data.append([product_id, name, price, stock])
         self._save_to_file()
         print("เพิ่มสินค้าสำเร็จ!")
 
@@ -92,7 +107,7 @@ class Inventory:
 
     def search_product(self):
         print("\n===== ค้นหาสินค้า =====")
-        search = input("กรอกรหัสสินค้า: ")
+        search = input("กรอกรหัสสินค้า: ").strip()
 
         for row in self.products_data:
             if row[0] == search:
@@ -106,7 +121,7 @@ class Inventory:
 
     def stock_in(self):
         print("\n===== รับสินค้าเข้า =====")
-        search = input("กรอกรหัสสินค้า: ")
+        search = input("กรอกรหัสสินค้า: ").strip()
 
         for row in self.products_data:
             if row[0] == search:
@@ -129,7 +144,7 @@ class Inventory:
 
     def stock_out(self):
         print("\n===== ขายสินค้าออก =====")
-        search = input("กรอกรหัสสินค้า: ")
+        search = input("กรอกรหัสสินค้า: ").strip()
 
         for row in self.products_data:
             if row[0] == search:
@@ -186,7 +201,7 @@ if __name__ == "__main__":
         print("6. ตรวจสอบสินค้าใกล้หมด")
         print("0. ออกจากโปรแกรม")
 
-        choice = input("เลือกเมนู: ")
+        choice = input("เลือกเมนู: ").strip()
 
         if choice == "1":
             manager.add_product()
